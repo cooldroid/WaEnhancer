@@ -79,7 +79,7 @@ class HideSeen(loader: ClassLoader, preferences: SharedPreferences) :
                 if (isInvalidJid) return@before
 
                 val userJid = FMessageWpp.UserJid(lid)
-                if (userJid.isNull) return@before
+                if (userJid.isNull || userJid.isNewsletter) return@before
 
                 val privacy = CustomPrivacy.getJSON(userJid.phoneNumber)
                 val isHide = processReadReceiptByType(this, job, userJid, privacy)
@@ -183,6 +183,7 @@ class HideSeen(loader: ClassLoader, preferences: SharedPreferences) :
                 }
 
                 val fmessageKey = generateFMessageKey(protocolTreeNodeWpp) ?: return@after
+                if (fmessageKey.remoteJid.isNewsletter) return@after
 
                 if (fmessageKey.remoteJid.isStatus) return@after
 
@@ -269,6 +270,7 @@ class HideSeen(loader: ClassLoader, preferences: SharedPreferences) :
         loadSenderPlayed.hook {
             before {
                 val fMessage = FMessageWpp(args[0])
+                if (fMessage.userJid.isNewsletter) return@before
                 processSenderPlayed(this, fMessage)
             }
         }
@@ -283,6 +285,7 @@ class HideSeen(loader: ClassLoader, preferences: SharedPreferences) :
                 if (set.isNullOrEmpty()) return@before
 
                 val fMessage = FMessageWpp(set.first())
+                if (fMessage.userJid.isNewsletter) return@before
                 processSenderPlayed(this, fMessage)
             }
         }
