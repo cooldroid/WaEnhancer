@@ -115,7 +115,7 @@ class HideSeen(loader: ClassLoader, preferences: SharedPreferences) :
                 if (isInvalidJid) return@before
 
                 val userJid = FMessageWpp.UserJid(lid)
-                if (userJid.isNull) return@before
+                if (userJid.isNull || userJid.isNewsletter) return@before
 
                 val privacy = CustomPrivacy.getJSON(userJid)
                 val isHide = processReadReceiptByType(this, job, userJid, privacy)
@@ -220,6 +220,7 @@ class HideSeen(loader: ClassLoader, preferences: SharedPreferences) :
                 }
 
                 val fmessageKey = generateFMessageKey(protocolTreeNodeWpp) ?: return@after
+                if (fmessageKey.remoteJid.isNewsletter) return@after
 
                 if (fmessageKey.remoteJid.isStatus) return@after
 
