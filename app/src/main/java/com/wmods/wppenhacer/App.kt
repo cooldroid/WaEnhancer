@@ -146,7 +146,7 @@ class App : Application() {
         @Suppress("SimplifyBooleanWithConstants", "KotlinConstantConditions")
         @JvmStatic
         val isOriginalPackage: Boolean
-            get() = BuildConfig.APPLICATION_ID == "com.wmods.wppenhacer"
+            get() = BuildConfig.APPLICATION_ID == "com.wmods.wppenhaced"
 
 
     }

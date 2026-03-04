@@ -75,13 +75,21 @@ class FMessageWpp(fMessage: Any?) {
         }
     }
 
-    private val fmessage: Any
-
-    init {
-        if (fMessage == null) throw RuntimeException("Object fMessage is null")
-        if (!TYPE.isInstance(fMessage))
-            throw RuntimeException("Object fMessage is not a FMessage Instance")
-        this.fmessage = fMessage
+    private val fmessage: Any? = if (fMessage == null) {
+        YukiLog.log("FMessageWpp: fMessage is null")
+        null
+    } else {
+        try {
+            if (TYPE.isInstance(fMessage)) {
+                fMessage
+            } else {
+                YukiLog.log("FMessageWpp: fMessage is not a FMessage instance")
+                null
+            }
+        } catch (e: Exception) {
+            YukiLog.log(e)
+            null
+        }
     }
 
     val userJid: UserJid
@@ -133,7 +141,7 @@ class FMessageWpp(fMessage: Any?) {
             }
         }
 
-    fun getObject(): Any {
+    fun getObject(): Any? {
         return fmessage
     }
 

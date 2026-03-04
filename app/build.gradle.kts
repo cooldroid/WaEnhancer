@@ -36,7 +36,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.wmods.wppenhacer"
+        applicationId = "com.wmods.wppenhaced"
         minSdk = 28
         //noinspection OldTargetApi
         targetSdk = 34
@@ -57,7 +57,7 @@ android {
         }
 
         ndk {
-            abiFilters.add("armeabi-v7a")
+            //abiFilters.add("armeabi-v7a")
             abiFilters.add("arm64-v8a")
         }
 
