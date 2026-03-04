@@ -61,7 +61,7 @@ object DebugUtils {
 
         if (printArgs) {
             @Suppress("UNCHECKED_CAST")
-            debugArgs(param.args as Array<Any>)
+            //debugArgs(param.args as Array<Any>)
             YukiLog.log(
                 "Return value: " + (param.result?.javaClass?.name
                     ?: null) + " -> VALUE: " + param.result
